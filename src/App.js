@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Board from "./components/board";
+import NavBar from "./components/navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Suduko from "./components/suduko";
+import Snake from "./components/snake";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="content bg-slate-900 h-screen w-screen flex flex-col">
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Board />} />
+          <Route path="/sudoko" element={<Suduko/>} />
+          <Route path="/snake" element={<Snake/>} />
+          <Route path="*" element={<div className="text-white text-9xl text-center">Page Not Found!!!</div>} />
+        </Routes>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
