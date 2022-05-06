@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useInterval from './useInterval';
 
 class LinkedListNode {
   constructor(value) {
@@ -140,6 +141,9 @@ const SankeGame = () => {
         break;
       }
     }
+    if(temp.lastIndexOf(temp[0]) !== 0) {
+      temp = [STARTING_SNAKECELL];
+    }
     setsnakeCells(new Set(temp));
 
     //temp = [...snakeCells];
@@ -176,9 +180,11 @@ const SankeGame = () => {
     // }, 1000);
   }, [snakeCells]);
 
-  const handleMovement = () => {
-    moveSnake();
-  };
+  useInterval(moveSnake,100);
+
+  // const handleMovement = () => {
+  //   moveSnake();
+  // };
 
   return (
     // <div className="board">
@@ -191,24 +197,24 @@ const SankeGame = () => {
     //   ))}
     // </div>
     <div className="w-11/12 h-3/4 m-auto flex">
-      <button
+      {/* <button
         className=" bg-white text-black"
         onClick={() => {
           handleMovement();
         }}
       >
         move manually
-      </button>
+      </button> */}
       <table className="m-auto h-full w-full border">
         <tbody>
           {board.map((row, rowIdx) => {
             return (
-              <tr className="h-6 border" key={rowIdx}>
+              <tr className="h-6 " key={rowIdx}>
                 {row.map((cellValue, cellIdx) => {
                   return (
                     <td
                       className={
-                        "w-6 border " +
+                        "w-6 " +
                         (snakeCells.has(cellValue) ? "bg-green-500 " : "") +
                         (foodCell === cellValue ? "bg-red-500" : "")
                       }
