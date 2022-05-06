@@ -47,6 +47,43 @@ const SankeGame = () => {
   const [snake, setsnake] = useState(new SinglyLinkedList(STARTING_SNAKECELL));
   const [direction, setdirection] = useState(DIRECTIONS.RIGHT);
 
+  const increaseSnakeSize = () => {
+    let temp = [...snakeCells];
+    let snakeTail = temp[temp.length - 1];
+    let newSnakeCell;
+    switch (direction) {
+      case DIRECTIONS.UP: {
+        newSnakeCell = snakeTail+boardSize;
+        break;
+      }
+      case DIRECTIONS.RIGHT: {
+        newSnakeCell = snakeTail - 1;
+        break;
+      }
+      case DIRECTIONS.LEFT: {
+        newSnakeCell = snakeTail + 1;
+        break;
+      }
+      case DIRECTIONS.DOWN: {
+        newSnakeCell = snakeTail - boardSize;
+        break;
+      }
+      default: {
+        newSnakeCell = snakeTail - 1;
+        break;
+      }
+    }
+    
+    temp.push(newSnakeCell);
+    setsnakeCells(new Set(temp));
+  }
+  const copyArr = () => {
+    let temp = [...snakeCells];
+    for(let i = temp.length - 1; i > 0; i--) {
+      temp[i] = temp[i-1];
+    }
+    return temp;
+  }
   const moveSnake = () => {
     document.addEventListener("keydown", (event) => {
       switch (event.key) { 
@@ -68,7 +105,7 @@ const SankeGame = () => {
           break;
       }
     });
-    let temp = [...snakeCells];
+    let temp = copyArr();
     const currentHeadCordinates = {
       row: Math.floor(temp[0] / boardSize),
       col: Math.floor(temp[0] % boardSize)-1,
@@ -97,6 +134,11 @@ const SankeGame = () => {
         currentHeadCordinates.row++;
         break;
       }
+      default: {
+        temp[0] = temp[0] + 1;
+        currentHeadCordinates.col++;
+        break;
+      }
     }
     setsnakeCells(new Set(temp));
 
@@ -107,7 +149,10 @@ const SankeGame = () => {
       while (snakeCells.has(newFoodCell)) {
         newFoodCell = getRandom(boardSize * (boardSize / 3));
       }
+      // snakeCells.add(foodCell);
       setFoodCell(newFoodCell);
+      increaseSnakeSize();
+      console.log(snakeCells);
     }
     
     if (
