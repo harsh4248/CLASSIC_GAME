@@ -2,7 +2,9 @@ import Board from "./components/board";
 import NavBar from "./components/navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Suduko from "./components/suduko";
-import Snake from "./components/snake";
+//import Snake from "./components/snake";
+import SankeGame from "./components/snake2";
+//import Snake from "./components/snake";
 
 const App = () => {
   return (
@@ -12,7 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Board />} />
           <Route path="/sudoko" element={<Suduko/>} />
-          <Route path="/snake" element={<Snake/>} />
+          <Route path="/snake" element={<SankeGame/>} />
           <Route path="*" element={<div className="text-white text-9xl text-center">Page Not Found!!!</div>} />
         </Routes>
       </Router>

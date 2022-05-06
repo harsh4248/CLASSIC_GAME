@@ -20,3 +20,17 @@ table tr td button {
   width: 100%;
   color: white;
 }
+.board {
+  outline: 2px auto rgb(134,154,189);
+  /* display: flex;
+  margin: auto; */
+}
+.row {
+  height: 50px;
+}
+.cell {
+  width: 50px;
+  height: 50px;
+  outline: 1px solid rgb(134,154,189);
+  display: inline-block;
+}
