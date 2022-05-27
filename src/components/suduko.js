@@ -52,16 +52,19 @@ const Suduko = () => {
       setsudoko(sudoko);
       // wrongVal(data, row, col);
       // rightVal(data, row, col);
-      const isValid = checkConstraints(row, col, data);
-      if (isValid === false) {
-        document.getElementById(
-          row.toString() + col.toString()
-        ).style.backgroundColor = "red";
-      } else {
-        document.getElementById(
-          row.toString() + col.toString()
-        ).style.backgroundColor = "transparent";
-      }
+      // const isValid = checkConstraints(row, col, data);
+      // if (isValid === false) {
+      //   document.getElementById(
+      //     row.toString() + col.toString()
+      //   ).style.backgroundColor = "red";
+      // } else {
+      //   document.getElementById(
+      //     row.toString() + col.toString()
+      //   ).style.backgroundColor = "transparent";
+      // }
+      document.getElementById(
+        row.toString() + col.toString()
+      ).style.backgroundColor = "transparent";
       const btn = document.getElementById(row.toString() + col.toString());
       btn.innerText = sudoko[row][col];
       //console.log(sudoko);
@@ -142,6 +145,7 @@ const Suduko = () => {
     for (let i = 0; i < question.length; i++) {
       for (let j = 0; j < question[0].length; j++) {
         sudoko[i][j] = question[i][j];
+
       }
     }
     setsudoko(sudoko);
@@ -157,6 +161,9 @@ const Suduko = () => {
               board[i][j] = nums;
               setdata(nums);
               autoBoardClick(i, j);
+              document.getElementById(
+                i.toString() + j.toString()
+              ).style.backgroundColor = "transparent";
               if (solve(board) === true) {
                 return true;
               } else {
@@ -174,7 +181,9 @@ const Suduko = () => {
     <div className="w-11/12 h-3/4 m-auto  flex flex-row">
       <div className="p-2 w-1/2 h-full m-auto">
         <div className="text-white">
-          <p className="lg:text-2xl md:text-base sm:text-xs text-center p-2 m-4">HOW TO PLAY:</p>
+          <p className="lg:text-2xl md:text-base sm:text-xs text-center p-2 m-4">
+            HOW TO PLAY:
+          </p>
           <ol className="list-decimal p-2">
             <li className="m-2">Select number from below.</li>
             <li className="m-2">Select Cell in the board.</li>
